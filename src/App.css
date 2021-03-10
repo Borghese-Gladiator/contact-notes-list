@@ -1,0 +1,253 @@
+#app {
+  background: #eeeeee;
+  padding: 30px;
+}
+
+#content {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.flex-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.import-button {
+  margin: 5px;
+  padding: 15px;
+  background-color: #393e46;
+  font-size: large;
+  color: white;
+}
+
+/* Adding transformation when the button is active */ 
+.import-button:active { 
+  transform: scale(0.95); 
+  /* Scaling button to 0.98 to its original size */ 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+  /* Lowering the shadow */ 
+}
+
+/* hide file input element */
+input[type="file"] {
+  display: none;
+}
+
+.upload-input {
+  margin: 5px;
+  padding: 15px;
+  background-color: #393e46;
+  font-size: large;
+  color: white;
+  border: 1px solid #ccc;
+}
+
+.upload-input:active { 
+  transform: scale(0.95); 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+}
+
+.song-list-container {
+  column-gap: 0px;
+}
+
+/* mobile devices */
+@media screen and (min-width: 320px) {
+  .song-list-container {
+    column-count: 1;
+  }
+}
+
+/* iPads, Tablets */
+@media screen and (min-width: 481px) {
+  .song-list-container {
+    column-count: 2;
+  }
+}
+
+/* Small screens, laptops */
+@media only screen and (min-width: 769px) {
+  .song-list-container {
+    column-count: 3;
+  }
+}
+
+/* Desktops, large screens */
+@media only screen and (min-width: 1025px) {
+  .song-list-container {
+    column-count: 4;
+  }
+}
+
+/* Extra large screens, TV */
+@media only screen and (min-width: 1200px) {
+  .song-list-container {
+    column-count: 5;
+  }
+}
+
+.song-list-wrapper {
+  display: inline-block;
+  position: relative;
+  margin: 5px; /* and that, will result in a 10px gap */
+
+  max-width: 300px;
+  background-color: #00adb5;
+  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+.song-list {
+  background: #e8e8e8;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 5px;
+  margin: 10px;  /* and that, will result in a 10px gap */
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 4px 10px;
+
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* wrap link on song-item container: https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/*/
+.song-item > span {
+  font-size: 15px;
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.close-btn:active { 
+  transform: scale(0.95); 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+}
+
+.close-btn-icon {
+  color: red;
+  font-size: 25px;
+}
+
+.add-btn {
+  /* 96 + 2*107 px margin = 310px => same size as song-list: max-width(300px) + 5px padding*/
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 107px;
+  margin-right: 107px;
+
+  text-decoration: none; 
+  border: none; 
+  cursor: pointer; 
+  outline: none; 
+  transition: 0.2s all; 
+  
+  padding: 12px 40px; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  background-color: green; 
+  color: #fff; 
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
+} 
+
+/* Adding transformation when the button is active */ 
+.add-btn:active { 
+  transform: scale(0.95); 
+  /* Scaling button to 0.98 to its original size */ 
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+  /* Lowering the shadow */ 
+} 
+
+
+/* InlineEdit component - overlays title over input element */
+/* these make sure it can work in any text element */
+.inline-text_copy--active,
+.inline-text_input--active {
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px dashed #999999;
+  outline: none;
+}
+
+.inline-text_copy--active {
+  cursor: pointer;
+}
+
+.inline-text_copy--hidden,
+.inline-text_input--hidden {
+  display: none;
+}
+
+.inline-text_input--active {
+  border-bottom: 1px solid #666666;
+  text-align: left;
+}
+
+/* Dropdown Menu styling */
+.dropdown-header {
+  padding: 0.5em 0em 0em 0em;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.dropdown-list-container {
+  position: absolute;
+  z-index: auto;
+  width: 10.5em;
+}
+
+.dropdown-list {
+  padding: 0;
+  margin: 0;
+  padding-left: 1em;
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #3faffa;
+  font-size: 1.3rem;
+  font-weight: 500; 
+}
+
+.dropdown-list:first-child {
+  padding-top: 0.8em;
+}
+
+.dropdown-list-item {
+  list-style: none;
+  margin-bottom: 0.8em;
+}
+
+
+.dropdown-list-item:hover {
+  color: #fd9e46;
+}
