@@ -16,51 +16,11 @@ if (localStorage.getItem("listNotesLists") === null) {
   localStorage.setItem('listNotesLists', JSON.stringify([
     {
       id: newId(),
-      name: 'Japanese City Pop',
+      name: 'Ryuichikun',
       notesList: [
         {
-          text: "Tatsuro Yamashita - Ride on Time"
+          text: "Up to lots of stuff"
         },
-        {
-          text: "Gawr Gura - Ride on Time"
-        },
-        {
-          text: "Tatsuro Yamashita - Someday/Itsuka"
-        }
-      ]
-    },
-    {
-      id: newId(),
-      name: 'Pop Songs',
-      notesList: [
-        {
-          text: "Miley Cyrus - Party in the USA"
-        },
-        {
-          text: "Jennifer Lopez - On The Floor ft. Pitbull"
-        },
-        {
-          text: "Ed Sheeran - Shape of You"
-        },
-        {
-          text: "Uptown Funk"
-        },
-        {
-          text: "Maroon 5 - Sugar"
-        },
-      ]
-    },
-    {
-      id: newId(),
-      name: 'Japanese Pop',
-      notesList: [
-        {
-          text: "UNISON SQUARE GARDEN \"Sugar song and Bitter step\"",
-          isCompleted: false
-        },
-        {
-          text: "YOASOBI \"Racing into the Night\" Official Music Video"
-        }
       ]
     },
   ]));
@@ -121,17 +81,11 @@ function App() {
     setListNotesLists(oldArray => [...oldArray,
     {
       id: newId(),
-      name: 'Japanese City Pop',
+      name: 'Ryuichikun',
       notesList: [
         {
-          text: "Tatsuro Yamashita - Ride on Time"
+          text: "Up to lots of stuff"
         },
-        {
-          text: "Gawr Gura - Ride on Time"
-        },
-        {
-          text: "Tatsuro Yamashita - Someday/Itsuka"
-        }
       ]
     }]);
   }
