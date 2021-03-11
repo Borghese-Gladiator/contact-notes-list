@@ -1,4 +1,9 @@
-# Music-List
+# Contact-Notes-List
+Built off of Custom Music List. Added date created info & restyled using Bootstrap 4.
+
+see custom music list here: [https://github.com/Borghese-Gladiator/music-list](https://github.com/Borghese-Gladiator/music-list)
+
+### Music-List README.md
 Track your music lists inside your browser (& import/export your music lists with text files).
 
 Use this utility with Discord bots which can play songs given the song title. I would recommend the Groovy bot.
