@@ -8,9 +8,11 @@ if (localStorage.getItem('lastId') === null) {
   lastId = localStorage.getItem('lastId');
 }
 
-export default function (prefix = 'id') {
+export function newId(prefix = 'id') {
   console.log(lastId)
   lastId++;
   localStorage.setItem('lastId', JSON.stringify(lastId));
   return `${prefix}${lastId}`;
 }
+
+export const localStorageKey = "listNotesLists"

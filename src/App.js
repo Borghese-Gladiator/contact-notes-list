@@ -6,14 +6,14 @@ import SongList from './components/SongList';
 // assets
 import { BsPlusCircle } from 'react-icons/bs';
 // util function
-import newId from './utils/newid';
+import { localStorageKey, newId } from './utils/utils';
 import useLocalStorage from './hooks/useLocalStorage';
 // styling
 import "./App.css";
 
 // if null, save a default value to localStorage
-if (localStorage.getItem("listNotesLists") === null) {
-  localStorage.setItem('listNotesLists', JSON.stringify([
+if (localStorage.getItem(localStorageKey) === null) {
+  localStorage.setItem(localStorageKey, JSON.stringify([
     {
       id: newId(),
       name: 'Ryuichikun',
@@ -28,7 +28,7 @@ if (localStorage.getItem("listNotesLists") === null) {
 
 function App() {
   // retrieve array from localStorage
-  const [listNotesLists, setListNotesLists] = useLocalStorage('listNotesLists');
+  const [listNotesLists, setListNotesLists] = useLocalStorage(localStorageKey);
 
   // apply functions on song list name (operation on name of one object in array of objects)
   const setStoredHeading = (notesListIdx, text) => {
