@@ -64,7 +64,7 @@ export default function SongListWrapper(props) {
             onSetText={text => setStoredHeading(songListIdx, text)}
           />
         </h3>
-        <span>{date}</span>
+        <h5>{date}</h5>
         <div className="song-list">
           {songs.map((todo, index) => (
             <SongItem
