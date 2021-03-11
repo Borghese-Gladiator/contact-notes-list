@@ -4,7 +4,7 @@ export default function DownloadButton() {
     const file = new Blob([localStorage.getItem('listSongLists')],
       { type: 'text/plain;charset=utf-8' });
     element.href = URL.createObjectURL(file);
-    element.download = "mySongLists.txt";
+    element.download = "myContactNotes.txt";
     document.body.appendChild(element);
     element.click();
   }
