@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 // custom components
-import DefaultLayout from './components/_layouts/DefaultLayout';
 import UploadButton from './components/UploadButton';
 import DownloadButton from './components/DownloadButton';
 import SongList from './components/SongList';
@@ -13,63 +12,54 @@ import useLocalStorage from './hooks/useLocalStorage';
 import "./App.css";
 
 // if null, save a default value to localStorage
-if (localStorage.getItem("listSongLists") === null) {
-  localStorage.setItem('listSongLists', JSON.stringify([
+if (localStorage.getItem("listNotesLists") === null) {
+  localStorage.setItem('listNotesLists', JSON.stringify([
     {
       id: newId(),
-      title: 'Japanese City Pop',
-      songList: [
+      name: 'Japanese City Pop',
+      notesList: [
         {
-          text: "Tatsuro Yamashita - Ride on Time",
-          isCompleted: false
+          text: "Tatsuro Yamashita - Ride on Time"
         },
         {
-          text: "Gawr Gura - Ride on Time",
-          isCompleted: false
+          text: "Gawr Gura - Ride on Time"
         },
         {
-          text: "Tatsuro Yamashita - Someday/Itsuka",
-          isCompleted: false
+          text: "Tatsuro Yamashita - Someday/Itsuka"
         }
       ]
     },
     {
       id: newId(),
-      title: 'Pop Songs',
-      songList: [
+      name: 'Pop Songs',
+      notesList: [
         {
-          text: "Miley Cyrus - Party in the USA",
-          isCompleted: false
+          text: "Miley Cyrus - Party in the USA"
         },
         {
-          text: "Jennifer Lopez - On The Floor ft. Pitbull",
-          isCompleted: false
+          text: "Jennifer Lopez - On The Floor ft. Pitbull"
         },
         {
-          text: "Ed Sheeran - Shape of You",
-          isCompleted: false
+          text: "Ed Sheeran - Shape of You"
         },
         {
-          text: "Uptown Funk",
-          isCompleted: false
+          text: "Uptown Funk"
         },
         {
-          text: "Maroon 5 - Sugar",
-          isCompleted: false
+          text: "Maroon 5 - Sugar"
         },
       ]
     },
     {
       id: newId(),
-      title: 'Japanese Pop',
-      songList: [
+      name: 'Japanese Pop',
+      notesList: [
         {
           text: "UNISON SQUARE GARDEN \"Sugar song and Bitter step\"",
           isCompleted: false
         },
         {
-          text: "YOASOBI \"Racing into the Night\" Official Music Video",
-          isCompleted: false
+          text: "YOASOBI \"Racing into the Night\" Official Music Video"
         }
       ]
     },
@@ -78,116 +68,98 @@ if (localStorage.getItem("listSongLists") === null) {
 
 function App() {
   // retrieve array from localStorage
-  const [listSongLists, setListSongLists] = useLocalStorage('listSongLists');
+  const [listNotesLists, setListNotesLists] = useLocalStorage('listNotesLists');
 
-  // apply functions on song list title (operation on title of one object in array of objects)
-  const setStoredHeading = (songListIdx, text) => {
-    const newArr = [...listSongLists]; // copy array
-    newArr[songListIdx].title = text
-    setListSongLists(newArr);
+  // apply functions on song list name (operation on name of one object in array of objects)
+  const setStoredHeading = (notesListIdx, text) => {
+    const newArr = [...listNotesLists]; // copy array
+    newArr[notesListIdx].name = text
+    setListNotesLists(newArr);
   }
 
-  // apply functions on individual song lists (operation on the array of objects, songList, inside an array of objects, listSongLists)
-  const addSongListItem = (songListIdx, text) => {
-    const newArr = [...listSongLists]; // copy array
-    const oldSongs = newArr[songListIdx].songList;
+  // apply functions on individual song lists (operation on the array of objects, notesList, inside an array of objects, listNotesLists)
+  const addnotesListItem = (notesListIdx, text) => {
+    const newArr = [...listNotesLists]; // copy array
+    const oldSongs = newArr[notesListIdx].notesList;
     const newSongs = [...oldSongs, {
       text: text,
       isCompleted: false
-    }]; // operation on SongListItem
-    newArr[songListIdx] = {
-      id: newArr[songListIdx].id,
-      title: newArr[songListIdx].title,
-      songList: newSongs
+    }]; // operation on notesListItem
+    newArr[notesListIdx] = {
+      id: newArr[notesListIdx].id,
+      name: newArr[notesListIdx].name,
+      notesList: newSongs
     };
-    setListSongLists(newArr);
+    setListNotesLists(newArr);
   };
 
-  const completeSongListItem = (songListIdx, songItemIdx) => {
-    const newArr = [...listSongLists]; // copy array
-    const oldSongs = newArr[songListIdx].songList;
+  const removenotesListItem = (notesListIdx, songItemIdx) => {
+    const newArr = [...listNotesLists]; // copy array
+    const oldSongs = newArr[notesListIdx].notesList;
     const newSongs = [...oldSongs];
-    newSongs[songItemIdx].isCompleted = true; // operation on SongListItem
-    newArr[songListIdx] = {
-      id: newArr[songListIdx].id,
-      title: newArr[songListIdx].title,
-      songList: newSongs
+    newSongs.splice(songItemIdx, 1); // operation on notesListItem
+    newArr[notesListIdx] = {
+      id: newArr[notesListIdx].id,
+      name: newArr[notesListIdx].name,
+      notesList: newSongs
     };
-    setListSongLists(newArr);
-  };
-
-  const removeSongListItem = (songListIdx, songItemIdx) => {
-    const newArr = [...listSongLists]; // copy array
-    const oldSongs = newArr[songListIdx].songList;
-    const newSongs = [...oldSongs];
-    newSongs.splice(songItemIdx, 1); // operation on SongListItem
-    newArr[songListIdx] = {
-      id: newArr[songListIdx].id,
-      title: newArr[songListIdx].title,
-      songList: newSongs
-    };
-    setListSongLists(newArr);
+    setListNotesLists(newArr);
   };
 
   // apply functions on list of song lists
-  const removeListSongList = index => {
-    const newTodos = [...listSongLists];
+  const removelistNotesList = index => {
+    const newTodos = [...listNotesLists];
     newTodos.splice(index, 1);
-    setListSongLists(newTodos);
+    setListNotesLists(newTodos);
   };
 
-  const addSongList = () => {
-    setListSongLists(oldArray => [...oldArray, {
+  const addNotesList = () => {
+    setListNotesLists(oldArray => [...oldArray,
+    {
       id: newId(),
-      title: 'Favorite Songs',
-      songList: [
+      name: 'Japanese City Pop',
+      notesList: [
         {
-          text: "Tatsuro Yamashita - Ride on Time",
-          isCompleted: false
+          text: "Tatsuro Yamashita - Ride on Time"
         },
         {
-          text: "Gawr Gura Sings Compilation",
-          isCompleted: false
+          text: "Gawr Gura - Ride on Time"
         },
         {
-          text: "Tatsuro Yamashita - Someday/Itsuka",
-          isCompleted: false
+          text: "Tatsuro Yamashita - Someday/Itsuka"
         }
       ]
     }]);
   }
 
   return (
-    <div id="app">
-      <DefaultLayout>
-        <div className="flex-button-group">
-          <UploadButton />
-          <DownloadButton />
+    <div className="container">
+      <div className="flex-button-group">
+        <UploadButton />
+        <DownloadButton />
+      </div>
+      <div className="d-flex flex-row flex-wrap mt-3">
+        {
+          listNotesLists.map((val, idx) => {
+            const { id, name, notesList } = val;
+            return (
+              <SongList
+                key={id}
+                songListIdx={idx}
+                removeSongList={removelistNotesList}
+                removeTodo={removenotesListItem}
+                addTodo={addnotesListItem}
+                songs={notesList}
+                storedHeading={name}
+                setStoredHeading={setStoredHeading}
+              />
+            );
+          })
+        }
+        <div className="add-btn" onClick={addNotesList}>
+          <BsPlusCircle />
         </div>
-        <div className="song-list-container">
-          {
-            listSongLists.map((val, idx) => {
-              const { id, title, songList } = val;
-              return (
-                <SongList
-                  key={idx}
-                  songListIdx={idx}
-                  removeSongList={removeListSongList}
-                  completeTodo={completeSongListItem}
-                  removeTodo={removeSongListItem}
-                  addTodo={addSongListItem}
-                  songs={songList}
-                  storedHeading={title}
-                  setStoredHeading={setStoredHeading}
-                />
-              );
-            })
-          }
-          <div className="add-btn" onClick={addSongList}>
-            <BsPlusCircle />
-          </div>
-        </div>
-      </DefaultLayout>
+      </div>
     </div>
   );
 }
