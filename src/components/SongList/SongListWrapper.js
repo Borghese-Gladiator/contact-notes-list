@@ -40,7 +40,7 @@ function SongItemForm({ songListIdx, addTodo }) {
 }
 
 export default function SongListWrapper(props) {
-  const { storedHeading, setStoredHeading, removeTodo, addTodo, songs, songListIdx, removeSongList } = props;
+  const { storedHeading, setStoredHeading, removeTodo, addTodo, songs, songListIdx, removeSongList, date } = props;
   const options = [
     {
       text: "Delete",
@@ -64,6 +64,7 @@ export default function SongListWrapper(props) {
             onSetText={text => setStoredHeading(songListIdx, text)}
           />
         </h3>
+        <span>{date}</span>
         <div className="song-list">
           {songs.map((todo, index) => (
             <SongItem

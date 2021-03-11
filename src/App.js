@@ -6,7 +6,7 @@ import SongList from './components/SongList';
 // assets
 import { BsPlusCircle } from 'react-icons/bs';
 // util function
-import { localStorageKey, newId } from './utils/utils';
+import { localStorageKey, newId, formatDate } from './utils/utils';
 import useLocalStorage from './hooks/useLocalStorage';
 // styling
 import "./App.css";
@@ -21,7 +21,8 @@ if (localStorage.getItem(localStorageKey) === null) {
         {
           text: "Up to lots of stuff"
         },
-      ]
+      ],
+      date: new Date(2021, 0, 16)
     },
   ]));
 }
@@ -86,7 +87,8 @@ function App() {
         {
           text: "Up to lots of stuff"
         },
-      ]
+      ],
+      date: new Date(2021, 0, 16)
     }]);
   }
 
@@ -103,7 +105,7 @@ function App() {
       <div className="d-flex flex-row flex-wrap mt-3">
         {
           listNotesLists.map((val, idx) => {
-            const { id, name, notesList } = val;
+            const { id, name, notesList, date } = val;
             return (
               <SongList
                 key={id}
@@ -114,6 +116,7 @@ function App() {
                 songs={notesList}
                 storedHeading={name}
                 setStoredHeading={setStoredHeading}
+                date={formatDate(date)}
               />
             );
           })
