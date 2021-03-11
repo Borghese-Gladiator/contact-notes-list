@@ -78,36 +78,40 @@ function App() {
   }
 
   // apply functions on individual song lists (operation on the array of objects, notesList, inside an array of objects, listNotesLists)
-  const addnotesListItem = (notesListIdx, text) => {
-    const newArr = [...listNotesLists]; // copy array
-    const oldSongs = newArr[notesListIdx].notesList;
-    const newSongs = [...oldSongs, {
+  const addItemToNotesList = (notesListIdx, text) => {
+    // copy array
+    const arrCopy = [...listNotesLists];
+    // add new item to notesList at idx
+    const newNotesList = [...arrCopy[notesListIdx].notesList, {
       text: text,
       isCompleted: false
-    }]; // operation on notesListItem
-    newArr[notesListIdx] = {
-      id: newArr[notesListIdx].id,
-      name: newArr[notesListIdx].name,
-      notesList: newSongs
+    }];
+    // set arrCopy to use new notesList
+    arrCopy[notesListIdx] = {
+      id: arrCopy[notesListIdx].id,
+      name: arrCopy[notesListIdx].name,
+      notesList: newNotesList
     };
-    setListNotesLists(newArr);
+    setListNotesLists(arrCopy);
   };
 
-  const removenotesListItem = (notesListIdx, songItemIdx) => {
-    const newArr = [...listNotesLists]; // copy array
-    const oldSongs = newArr[notesListIdx].notesList;
-    const newSongs = [...oldSongs];
-    newSongs.splice(songItemIdx, 1); // operation on notesListItem
-    newArr[notesListIdx] = {
-      id: newArr[notesListIdx].id,
-      name: newArr[notesListIdx].name,
-      notesList: newSongs
+  const removeItemFromNotesList = (notesListIdx, songItemIdx) => {
+    // copy array
+    const arrCopy = [...listNotesLists];
+    const newNotesList = [...arrCopy[notesListIdx].notesList]
+    // remove 1 item at songItemIdx from notesList
+    newNotesList.splice(songItemIdx, 1);
+    // set arrCopy to use new notesList
+    arrCopy[notesListIdx] = {
+      id: arrCopy[notesListIdx].id,
+      name: arrCopy[notesListIdx].name,
+      notesList: newNotesList
     };
-    setListNotesLists(newArr);
+    setListNotesLists(arrCopy);
   };
 
   // apply functions on list of song lists
-  const removelistNotesList = index => {
+  const removeNotesList = index => {
     const newTodos = [...listNotesLists];
     newTodos.splice(index, 1);
     setListNotesLists(newTodos);
@@ -134,6 +138,10 @@ function App() {
 
   return (
     <div className="container">
+      <div className="card d-flex justify-content-center align-items-center">
+        <h4>Conversation Tracker</h4>
+        <p>Track points from your last conversation with someone</p>
+      </div>
       <div className="flex-button-group">
         <UploadButton />
         <DownloadButton />
@@ -146,9 +154,9 @@ function App() {
               <SongList
                 key={id}
                 songListIdx={idx}
-                removeSongList={removelistNotesList}
-                removeTodo={removenotesListItem}
-                addTodo={addnotesListItem}
+                removeSongList={removeNotesList}
+                removeTodo={removeItemFromNotesList}
+                addTodo={addItemToNotesList}
                 songs={notesList}
                 storedHeading={name}
                 setStoredHeading={setStoredHeading}
