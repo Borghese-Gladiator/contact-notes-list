@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 // custom components
 import InlineEdit from './InlineEdit';
 import DropdownMenu from './DropdownMenu';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-function SongItem({ songListIdx, todo, index, completeTodo, removeTodo }) {
+function SongItem({ songListIdx, todo, index, removeTodo }) {
   return (
     <div
       className="song-item"
@@ -19,7 +18,7 @@ function SongItem({ songListIdx, todo, index, completeTodo, removeTodo }) {
 }
 
 function SongItemForm({ songListIdx, addTodo }) {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -41,9 +40,7 @@ function SongItemForm({ songListIdx, addTodo }) {
 }
 
 export default function SongListWrapper(props) {
-  const { storedHeading, setStoredHeading, completeTodo, removeTodo, addTodo, songs, songListIdx, removeSongList } = props;
-
-  // const options = ["Mangoes", "Apples", "Oranges"];
+  const { storedHeading, setStoredHeading, removeTodo, addTodo, songs, songListIdx, removeSongList } = props;
   const options = [
     {
       text: "Delete",
@@ -54,31 +51,31 @@ export default function SongListWrapper(props) {
       }
     }
   ]
-// onClick={() => removeSongList(index)}
-// <AiOutlineCloseCircle className="close-btn-icon" />
+  
   return (
-    <div className="song-list-wrapper">
-      <div className="close-btn" >
-        <DropdownMenu options={options} />
-      </div>
-      <h3>
-        <InlineEdit
-          text={storedHeading}
-          onSetText={text => setStoredHeading(songListIdx, text)}
-        />
-      </h3>
-      <div className="song-list">
-        {songs.map((todo, index) => (
-          <SongItem
-            key={index}
-            songListIdx={songListIdx}
-            index={index}
-            todo={todo}
-            completeTodo={completeTodo}
-            removeTodo={removeTodo}
+    <div className="col-12 col-sm-6 col-lg-4">
+      <div className="card m-1 p-2">
+        <div className="close-btn" >
+          <DropdownMenu options={options} />
+        </div>
+        <h3>
+          <InlineEdit
+            text={storedHeading}
+            onSetText={text => setStoredHeading(songListIdx, text)}
           />
-        ))}
-        <SongItemForm songListIdx={songListIdx} addTodo={addTodo} />
+        </h3>
+        <div className="song-list">
+          {songs.map((todo, index) => (
+            <SongItem
+              key={index}
+              songListIdx={songListIdx}
+              index={index}
+              todo={todo}
+              removeTodo={removeTodo}
+            />
+          ))}
+          <SongItemForm songListIdx={songListIdx} addTodo={addTodo} />
+        </div>
       </div>
     </div>
   )
