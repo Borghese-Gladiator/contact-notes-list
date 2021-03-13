@@ -106,6 +106,7 @@ function App() {
         {
           listNotesLists.map((val, idx) => {
             const { id, name, notesList, date } = val;
+            console.log(date)
             return (
               <SongList
                 key={id}
