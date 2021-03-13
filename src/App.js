@@ -17,12 +17,12 @@ if (localStorage.getItem(localStorageKey) === null) {
     {
       id: newId(),
       name: 'Ryuichikun',
+      date: new Date(),
       notesList: [
         {
           text: "Up to lots of stuff"
         },
-      ],
-      date: new Date()
+      ]
     },
   ]));
 }
@@ -83,12 +83,12 @@ function App() {
     {
       id: newId(),
       name: 'Ryuichikun',
+      date: new Date(),
       notesList: [
         {
           text: "Up to lots of stuff"
         },
       ],
-      date: new Date()
     }]);
   }
 
