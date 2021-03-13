@@ -22,7 +22,7 @@ if (localStorage.getItem(localStorageKey) === null) {
           text: "Up to lots of stuff"
         },
       ],
-      date: new Date(2021, 0, 16)
+      date: new Date()
     },
   ]));
 }
@@ -88,7 +88,7 @@ function App() {
           text: "Up to lots of stuff"
         },
       ],
-      date: new Date(2021, 0, 16)
+      date: new Date()
     }]);
   }
 
