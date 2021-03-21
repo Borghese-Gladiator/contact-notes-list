@@ -17,7 +17,7 @@ if (localStorage.getItem(localStorageKey) === null) {
     {
       id: newId(),
       name: 'Ryuichikun',
-      date: new Date(),
+      dateSeconds: (new Date()).getTime(),
       notesList: [
         {
           text: "Up to lots of stuff"
@@ -51,6 +51,7 @@ function App() {
     arrCopy[notesListIdx] = {
       id: arrCopy[notesListIdx].id,
       name: arrCopy[notesListIdx].name,
+      dateSeconds: arrCopy[notesListIdx].dateSeconds,
       notesList: newNotesList
     };
     setListNotesLists(arrCopy);
@@ -66,6 +67,7 @@ function App() {
     arrCopy[notesListIdx] = {
       id: arrCopy[notesListIdx].id,
       name: arrCopy[notesListIdx].name,
+      dateSeconds: arrCopy[notesListIdx].dateSeconds,
       notesList: newNotesList
     };
     setListNotesLists(arrCopy);
@@ -83,7 +85,7 @@ function App() {
     {
       id: newId(),
       name: 'Ryuichikun',
-      date: new Date(),
+      dateSeconds: (new Date()).getTime(),
       notesList: [
         {
           text: "Up to lots of stuff"
@@ -105,8 +107,11 @@ function App() {
       <div className="d-flex flex-row flex-wrap mt-3">
         {
           listNotesLists.map((val, idx) => {
-            const { id, name, notesList, date } = val;
-            console.log(date)
+            const { id, name, notesList, dateSeconds } = val;
+            console.log(dateSeconds)
+            console.log(typeof dateSeconds)
+            // const dateObj = Date.parse(date)
+            // console.log(dateObj)
             return (
               <SongList
                 key={id}
@@ -117,7 +122,7 @@ function App() {
                 songs={notesList}
                 storedHeading={name}
                 setStoredHeading={setStoredHeading}
-                date={formatDate(date)}
+                date={formatDate(dateSeconds)}
               />
             );
           })
