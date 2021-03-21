@@ -1,1 +1,1 @@
-export { default } from './SongListWrapper';
+export { default } from './SongList';
